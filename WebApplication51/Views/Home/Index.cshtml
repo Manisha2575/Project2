@@ -1,0 +1,171 @@
+﻿@model IEnumerable<WebApplication51.Models.ViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+@*
+        <div style="width:90%;">
+            <p>
+                <h4 align="right">
+                    <button type="button" class="btn btn-info">@Html.ActionLink("Add ", "New")</button>
+                </h4>
+            </p>
+            <table id="Jdatatable" class="table table-responsive table-bordered">
+                <thead>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>RollNo</th>
+                        <th>Class</th>
+                        <th>FatherName</th>
+                        <th>MotherName</th>
+                        <th>Address</th>
+                        <th>PhoneNum</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+            var uri = 'http://localhost:19110/api/StudentApi';
+            $("#Jdatatable").DataTable({
+                "ajax": {
+                    url: uri,
+                    type: 'GET',
+                    dataType: 'json',
+                },
+                "columns": [
+                            { "data": "FirstName", "autoWidth": true },
+                            { "data": "LastName", "autoWidth": true },
+                            { "data": "RollNo", "autoWidth": true },
+                            { "data": "Class", "autoWidth": true },
+                            { "data": "FatherName", "autoWidth": true },
+                            { "data": "MotherName", "autoWidth": true },
+                            { "data": "Address", "autoWidth": true },
+                            { "data": "PhoneNum", "autoWidth": true },
+                {
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="http://localhost:19110/Home/Edit" class="editor_edit">Edit</a> | <a href="" class="editor_remove">Delete</a>'
+                },
+                   { "data": null, "defaultContent": "<input type='checkbox'>", "autoWidth": true }
+
+                ]
+            });
+        });
+    </script> *@
+
+
+
+
+<div>
+    <h2>Student</h2>
+
+    <table id="student" class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>RollNo</th>
+                <th>Class</th>
+                <th>FatherName</th>
+                <th>MotherName</th>
+                <th>Address</th>
+                <th>PhoneNum</th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+
+@*<div>
+        <h2>Search by ID</h2>
+
+        <input type="text" size="5" id="stuId" />
+        <input type="button" value="Search" onclick="find();" />
+
+        <p id="st"></p>
+    </div>*@
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+        var uri = "http://localhost:19110/api/StudentApi";
+            $(document).ready(function () {
+                $.getJSON(uri)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        $('#student').append("<tr><td>" + item.FirstName + "</td>" + "<td>" + item.LastName + "</td>" + "<td>" + item.RollNo + "</td>" + "<td>" + item.Class + "</td>" + "<td>" + item.studentdetails.FatherName + "</td>" + "<td>" + item.studentdetails.MotherName + "</td>" + "<td>" + item.studentdetails.Address + "</td>" + "<td>" + item.studentdetails.PhoneNum + "</td></tr>");
+                    });
+                });
+            });
+
+            //function formatItem(item) {
+            //    return item.Name + '-' + item.RollNo;
+            //}
+            //function find() {
+            //    var id = $('#stuId').val();
+            //    $.getJSON(uri + '/' + id)
+            //    .done(function (data) {
+            //        $('#st').text(formatItem(data));
+            //    })
+            //    .fail(function (jqXHR, textStatus, err) {
+            //        $('#student').text('error' + err);
+            //    })
+            //}
+
+</script>
+<div>
+    <table id="jqGrid"></table>
+    <div id="jqControls"></div>
+</div>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+<script type="text/javascript" src="~/Scripts/jquery-1.10.4.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/i18n/grid.locale-en.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.jqGrid.min.js"></script>
+
+<h1></h1>
+
+<h1></h1>
+
+<h1></h1>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Create
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Register Here</h4>
+            </div>
+            <div class="modal-body">
+                @{Html.RenderPartial("Partial");}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
